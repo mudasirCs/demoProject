@@ -1,8 +1,11 @@
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import { ProductContext } from "../context/ProductProvider";
+import { useContext } from "react";
 
-export function ProductInputForm({ products, setProducts,editingProduct,setEditingProduct }) {
+export function ProductInputForm() {
+  const { products, setProducts,editingProduct,setEditingProduct }= useContext(ProductContext)
   
   function productEnlist({ name, price, stock, image, description }) {
     const imageUrl = image ? URL.createObjectURL(image) : null;
@@ -67,7 +70,7 @@ export function ProductInputForm({ products, setProducts,editingProduct,setEditi
               :p
             )
         )
-        toast(`${editingProduct.name} has been edited`)
+        toast(`${editingProduct.name} has been edited into a ${values.name}`)
         setEditingProduct(null)
         }
         else{

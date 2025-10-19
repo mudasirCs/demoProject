@@ -1,6 +1,10 @@
 import ProductRow from "./productRow"
+import { ProductContext } from "../context/ProductProvider"
+import { useContext } from "react"
 
-export default function ProductTable({products,handleDelete,handleEdit}){
+export default function ProductTable(){
+    const {currentProducts,handleDelete,handleEdit}=useContext(ProductContext)
+
     return(
         <table className="flex flex-col justify-center items-center">
             <thead>
@@ -15,7 +19,7 @@ export default function ProductTable({products,handleDelete,handleEdit}){
                 </tr>
             </thead>
             <tbody>
-            {products.map((p,index)=>{
+            {currentProducts.map((p,index)=>{
              return (
                         <ProductRow 
                         key={index}
