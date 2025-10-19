@@ -10,6 +10,7 @@ export function Products(){
         {currentProducts?.map((p,index)=>{
             return(  <Product
                     key={index} 
+                    id={p.id}
                     name={p.name} 
                     price={p.price} 
                     stock={p.stock} 

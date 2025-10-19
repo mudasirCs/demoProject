@@ -1,52 +1,68 @@
 import './App.css'
 // import testImage from './logo512.png'
-import {  useState } from 'react';
-import { Products } from './components/Products';
-import { ProductInputForm } from './components/ProductInputForm';
-import ProductTable from './components/productTable';
-import Pagination from './utility/Pagination';
+// import {  useEffect, useState } from 'react';
 import { ProductProvider } from './context/ProductProvider';
+import { Routes,Route} from 'react-router-dom';
+import { AdminView } from './pages/AdminView';
+import { GuestView } from './pages/GuestView';
+import { ProductDetail } from './pages/ProductDetail';
+
 
 function App() {
-  const [user,setUser]=useState("guest")
+  // const [user,setUser]=useState("guest")
+  // const navigate=useNavigate()
+
+    // useEffect(()=>{
+    //   if(user==="admin") navigate("/admin")
+    //     else if(user==="guest") navigate("/")
+    // },[user,navigate])
+
 
     return (
      < ProductProvider className="App">
         
-          <div>
-            <label>
-            <input  type="radio" name="role" value="guest" onClick={(e)=>setUser(e.target.value)}/>
-            Guest
-          </label>
+      {/* <div className="flex justify-center gap-5 my-6">
+        <label className="flex items-center gap-2 cursor-pointer bg-teal-600 text-white px-4 py-2 rounded-full hover:bg-teal-700 transition-all duration-200">
+          <input
+            type="radio"
+            name="role"
+            value="guest"
+            checked={user==="guest"}
+            onClick={() => setUser("guest")}
+            className="accent-teal-400 w-4 h-4"
+          />
+          <span className="text-sm font-medium">Guest</span>
+        </label>
 
-          <label>
-            <input  type="radio" name="role" value="admin" onClick={(e)=>setUser(e.target.value)}/>
-            Admin
-          </label>
-          </div>
+        <label className="flex items-center gap-2 cursor-pointer bg-teal-600 text-white px-4 py-2 rounded-full hover:bg-teal-700 transition-all duration-200">
+          <input
+            type="radio"
+            name="role"
+            value="admin"
+            checked={user==="admin"}
+            onClick={() => setUser("admin")}
+            className="accent-teal-400 w-4 h-4"
+          />
+          <span className="text-sm font-medium">Admin</span>
+        </label>
+      </div> */}
 
-          {/* <nav>
-            <Link to>Admin</Link>
-            <Link >Guest</Link>
-          </nav> */}
-
-          { 
-          user==="admin" &&(
-          <>
-          <ProductInputForm /> 
-          <ProductTable />
-          <Pagination/>
-          </>)
-          }
-
-          {
-          user==="guest" &&
-          (<>
-          <Products/> 
-          <Pagination/>      
-          </>)
-          }
-
+      
+      <Routes>
+        <Route 
+        path="/" 
+        element={<GuestView/>} 
+        />
+        
+        <Route 
+        path="/admin" 
+        element={<AdminView/>}
+        />
+        <Route
+        path='/product/:id'
+        element={<ProductDetail />}
+        />
+      </Routes>
 
      </ProductProvider>
 
