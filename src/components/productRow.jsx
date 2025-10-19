@@ -1,7 +1,7 @@
 export default function ProductRow({id,name,price,stock,image,handleDelete,handleEdit}){
     return(
         <tr className="table-row">
-            <td>{id}</td>
+            <td className="w-96">{id}</td>
             <td>{name}</td>
             <td>{price}</td>
             <td>{stock}</td>

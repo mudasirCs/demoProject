@@ -5,6 +5,7 @@ export default function ProductTable({products,handleDelete,handleEdit}){
         <table className="flex flex-col justify-center items-center">
             <thead>
                 <tr className="table-row">
+                    <th className="w-96">id</th>
                     <th>Name</th>
                     <th>Price</th>
                     <th>Stock</th>

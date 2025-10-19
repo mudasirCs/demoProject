@@ -22,11 +22,11 @@ body {
 }
 
 .table-row > th {
-  @apply min-w-16 min-h-16 flex justify-center items-center;
+  @apply min-w-20 min-h-16 flex justify-center items-center;
 }
 
 .table-row > td {
-  @apply min-w-16 min-h-16 flex justify-center items-center border border-blue-600 rounded-2xl;
+  @apply min-w-20 min-h-16 flex justify-center items-center border border-blue-600 rounded-2xl;
 }
 
 /* .action-btn {

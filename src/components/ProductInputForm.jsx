@@ -1,11 +1,13 @@
 import { Form, Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
-export function ProductInputForm({ products, setProducts,editingProduct }) {
+export function ProductInputForm({ products, setProducts,editingProduct,setEditingProduct }) {
   
   function productEnlist({ name, price, stock, image, description }) {
     const imageUrl = image ? URL.createObjectURL(image) : null;
     const newProduct = {
+      id:crypto.randomUUID(),
       name: name,
       price: price,
       stock: stock,
@@ -14,9 +16,10 @@ export function ProductInputForm({ products, setProducts,editingProduct }) {
     };
 
     setProducts([...products, newProduct]);
-    console.log(
-      `logging the new product: ${JSON.stringify(newProduct, null, 2)}`
-    );
+      toast(`${newProduct.name} has been Added!`)
+    // console.log(
+    //   `logging the new product: ${JSON.stringify(newProduct, null, 2)}`
+    // );
     // alert(displayProduct)
   }
 
@@ -41,6 +44,7 @@ export function ProductInputForm({ products, setProducts,editingProduct }) {
         image: null,
         description: "",
       }}
+      enableReinitialize={true}
       validationSchema={Yup.object({
         name: Yup.string().required("Name your game! ahem product for now"),
         price: Yup.number()
@@ -55,7 +59,20 @@ export function ProductInputForm({ products, setProducts,editingProduct }) {
         description: Yup.string(),
       })}
       onSubmit={(values,{resetForm}) => {
-        productEnlist(values);
+        if(editingProduct){
+          setProducts(
+            products.map(p=>
+              p.id===editingProduct.id
+              ?{...p,...values, image:URL.createObjectURL(values.image)}
+              :p
+            )
+        )
+        toast(`${editingProduct.name} has been edited`)
+        setEditingProduct(null)
+        }
+        else{
+        productEnlist(values)
+        }
         resetForm()
       }}
     >
